@@ -16,9 +16,9 @@ def product_http_detail_view(request, id):
         raise Http404
     return HttpResponse(f"Product id: {p.id}")
     
-def product_api_detail_view(request, *args, **kwargs):
-    qs = Product.objects.all()
-    p = qs.first()
-    if p:
-        return JsonResponse({"id": p.id})
-    return JsonResponse({})
+def product_api_detail_view(request, id):
+    try:
+        p = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        return JsonResponse({"message": "Not found."})
+    return HttpResponse(f"Product id: {p.id}")
