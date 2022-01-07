@@ -7,7 +7,9 @@ from .models import Product
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    return HttpResponse("HEY, SAUL!")
+    # return HttpResponse("HEY, SAUL!")
+    context = {"name": "Saul"}
+    return render(request, "home.html", context)
 
 def product_http_detail_view(request, id):
     try:
