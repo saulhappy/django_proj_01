@@ -4,4 +4,6 @@
 
 Hi product object {{ object.id }}
 
+{% include 'products/detail_snippet.html' with product=object%}
+
 {% endblock content %}

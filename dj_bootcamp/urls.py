@@ -20,12 +20,14 @@ from products.views import(
     home_view,
     product_api_detail_view,
     product_http_detail_view,
-    product_http_detail_view
+    product_http_detail_view,
+    product_list_view
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/', home_view),
+    path('products/', product_list_view),
     path('products/<int:id>/', product_http_detail_view),
     path('api/products/<int:id>/', product_api_detail_view),
 
