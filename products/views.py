@@ -6,6 +6,10 @@ from .models import Product
 
 # Create your views here.
 
+def test_view(request, *args, **kwargs):
+    import pdb; pdb.set_trace()
+    return HttpResponse("This is the test view")
+
 def home_view(request, *args, **kwargs):
     # return HttpResponse("HEY, SAUL!")
     context = {"name": "Saul"}
