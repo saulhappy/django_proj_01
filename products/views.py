@@ -34,3 +34,7 @@ def product_list_view(request, *args, **kwargs):
     qs = Product.objects.all()
     context = {"object_list": qs}
     return render(request, "products/list.html", context)
+
+def product_create_view(request):
+   
+    return render(request, "form.html", {})

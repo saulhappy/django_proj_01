@@ -22,7 +22,8 @@ from products.views import(
     product_api_detail_view,
     product_http_detail_view,
     product_http_detail_view,
-    product_list_view
+    product_list_view,
+    product_create_view
 )
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
     path('search/', home_view),
     path('test/', test_view),
     path('products/', product_list_view),
+    path('products/create/', product_create_view),
     path('products/<int:id>/', product_http_detail_view),
     path('api/products/<int:id>/', product_api_detail_view),
 
