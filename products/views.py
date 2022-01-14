@@ -12,6 +12,9 @@ def test_view(request, *args, **kwargs):
 
 def home_view(request, *args, **kwargs):
     # return HttpResponse("HEY, SAUL!")
+    query = request.GET.get('q')
+    qs = Product.objects.filter(description__icontains=query[0])
+    print(query, qs)
     context = {"name": "Saul"}
     return render(request, "home.html", context)
 
@@ -36,5 +39,7 @@ def product_list_view(request, *args, **kwargs):
     return render(request, "products/list.html", context)
 
 def product_create_view(request):
+    print("post:", request.POST)
+    print("get:", request.GET)
    
     return render(request, "form.html", {})
