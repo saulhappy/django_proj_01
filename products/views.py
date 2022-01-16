@@ -3,6 +3,7 @@ from django.http.response import Http404
 from django.shortcuts import render
 
 from .models import Product
+from .forms import ProductForm
 
 # Create your views here.
 
@@ -39,7 +40,10 @@ def product_list_view(request, *args, **kwargs):
     return render(request, "products/list.html", context)
 
 def product_create_view(request):
-    print("post:", request.POST)
-    print("get:", request.GET)
-   
+    if request.method == "POST":
+        data = request.POST
+        if data:
+            form = ProductForm(request.POST)
+            print("form validity: ", form.is_valid())
+            print("data: ", data)
     return render(request, "form.html", {})
