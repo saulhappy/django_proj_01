@@ -44,6 +44,7 @@ def product_create_view(request):
         data = request.POST
         if data:
             form = ProductForm(request.POST)
-            print("form validity: ", form.is_valid())
-            print("data: ", data)
+            if form.is_valid():
+                name = form.cleaned_data.get("name")
+                Product.objects.create(name=name)        
     return render(request, "form.html", {})
