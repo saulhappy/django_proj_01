@@ -19,4 +19,5 @@ def login_view(request):
     return render(request, "forms.html", {"form": form})
 
 def logout_view(request):
-    pass
+    logout(request)
+    return redirect('/login')
