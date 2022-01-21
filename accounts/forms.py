@@ -3,9 +3,31 @@ from django.forms import forms, widgets
 
 User = get_user_model()
 
+class RegisterForm(forms.Form):
+    email = forms.EmailField()
+    password1 = forms.CharField(
+        label = "Password",
+        widget = forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "user-password"
+            }
+        )
+    )
+    password2 = forms.CharField(
+        label = "Confirm Password",
+        widget = forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "user-confirm-password"
+            }
+        )
+    )
+
 class LoginForm(forms.Form):
-    username = forms.Charfield()
-    pasword = forms.Charfield(
+    email = forms.CharField()
+    password = forms.CharField(
+        label = "Password",
         widget = forms.PasswordInput(
             attrs={
                 "class": "form-control",
@@ -15,10 +37,10 @@ class LoginForm(forms.Form):
     )
 
     def validate_username(self):
-        username = self.cleaned_data.get("username")
-        qs = User.objects.filter(username__iexact=username)
+        email = self.cleaned_data.get("email")
+        qs = User.objects.filter(email__iexact=email)
 
         if not qs.exists():
-            raise forms.ValidationError("Invalid user")
+            raise forms.ValidationError("Email not found")
         
-        return username
+        return email
