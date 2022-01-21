@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
+
+from .forms import LoginForm, RegisterForm
 
 # Create your views here.
 
-from .forms import LoginForm
 
 def login_view(request):
     form = LoginForm(request.POST or None)

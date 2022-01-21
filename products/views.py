@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.http.response import Http404
 from django.shortcuts import render
 
-from .models import Product
 from .forms import ProductModelForm
+from .models import Product
 
 # Create your views here.
 
