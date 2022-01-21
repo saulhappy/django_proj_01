@@ -24,6 +24,15 @@ class RegisterForm(forms.Form):
         )
     )
 
+    def validate_email(self):
+        email = self.cleaned_data.get("email")
+        qs = User.objects.filter(email__iexact=email)
+
+        if qs.exists():
+            raise forms.ValidationError("Email already taken. Try another")
+        
+        return email
+
 class LoginForm(forms.Form):
     email = forms.CharField()
     password = forms.CharField(
@@ -36,7 +45,7 @@ class LoginForm(forms.Form):
         )
     )
 
-    def validate_username(self):
+    def validate_email(self):
         email = self.cleaned_data.get("email")
         qs = User.objects.filter(email__iexact=email)
 
