@@ -5,7 +5,7 @@ from .forms import LoginForm, RegisterForm
 
 
 def register_view(request):
-    form = RegisterForm(request.post or None)
+    form = RegisterForm(request.POST or None)
     if form.is_valid():
         email = form.cleaned_data.get("email")
         password1 = form.cleaned_data.get("password1")
@@ -32,7 +32,7 @@ def login_view(request):
             return redirect("/")
         else:
             request.session['invalid_user'] = 1
-    return render(request, "forms.html", {"form": form})
+    return render(request, "form.html", {"form": form})
 
 def logout_view(request):
     logout(request)
