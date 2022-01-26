@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, JsonResponse
 from django.http.response import Http404
 from django.shortcuts import render
@@ -39,8 +39,8 @@ def product_list_view(request, *args, **kwargs):
     qs = Product.objects.all()
     context = {"object_list": qs}
     return render(request, "products/list.html", context)
-    
-@login_required
+
+@staff_member_required
 def product_create_view(request):
     form = ProductModelForm(request.POST or None)   
     if form.is_valid():
