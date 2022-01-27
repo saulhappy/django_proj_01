@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm, RegisterForm
