@@ -44,7 +44,8 @@ def product_list_view(request, *args, **kwargs):
 def product_create_view(request):
     form = ProductModelForm(request.POST or None)   
     if form.is_valid():
-        data = form.cleaned_data
-        Product.objects.create(**data)
-
+        obj = form.save(commit=False)
+        obj.user = request.user
+        obj.save()
+        form = ProductModelForm()
     return render(request, "form.html", {"form": form})
