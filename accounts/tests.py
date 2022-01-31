@@ -14,3 +14,5 @@ class UserTestCase(TestCase):
         user1.set_password("saul")
         user1.save()
 
+    def test_user_create(self):
+        pass 
