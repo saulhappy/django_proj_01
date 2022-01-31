@@ -5,7 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 
-class DataConnectorCateogry(models.Model):
+class ProductCategory(models.Model):
     MARKETING_ANALYTICS = 'marketing_analytics'
     SALES_ANALYTICS = 'sales_analytics'
     ENGINEERING_ANALYTICS = 'engineering_analytics'
@@ -18,21 +18,28 @@ class DataConnectorCateogry(models.Model):
         (WEB_ANALYTICS, 'Web Analytics')
     )
 
-    title = models.CharField(max_length=140, choices=CATEGORY_CHOICES, null=True, blank=True)
-
+    category_name = models.CharField(max_length=140, choices=CATEGORY_CHOICES, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.category_name
 
-class Product(DataConnectorCateogry):
-    def get_default_category(self):
-        return DataConnectorCateogry.objects.get(name="marketing_analytics")
-    
+class Product(ProductCategory):
+    def get_or_create_default_category():
+        obj, created = ProductCategory.objects.get_or_create(category_name='marketing_analytics')
+        return obj
+
+    CATEGORY2_CHOICES = (
+        ('Marketing Analytics', 'Marketing Analytics'),
+        ('Sales Analytics', 'Sales Analytics'),
+        ('Engineering Analytics', 'Engineering Analytics'),
+        ('Web Analytics', 'Web Analytics')
+    )
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    name = models.CharField(max_length=140)
+    product_name = models.CharField(max_length=140)
     price = models.IntegerField(default=0)
     slogan = models.TextField(null=True, blank=True)
-    category = models.ForeignKey(DataConnectorCateogry, default=get_default_category, null=True, blank=True, on_delete=models.SET_NULL, related_name='product_category')
+    category = models.ForeignKey(ProductCategory, null=True, blank=True, on_delete=models.SET_NULL, related_name='product_category', default=get_or_create_default_category)
+    category2 = models.CharField(max_length=140, choices=CATEGORY2_CHOICES, null=True, blank=True)
 
-    def __str__(self) -> str:
-        return self.name
+    def __str__(self):
+        return self.product_name
