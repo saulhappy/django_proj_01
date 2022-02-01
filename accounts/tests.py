@@ -15,4 +15,5 @@ class UserTestCase(TestCase):
         user1.save()
 
     def test_user_create(self):
-        pass 
+        user_count = User.objects.all().count()
+        self.assertEqual(user_count, 1) 
