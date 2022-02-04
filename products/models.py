@@ -22,9 +22,13 @@ class ProductCategory(models.Model):
 class Product(ProductCategory):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     product_name = models.CharField(max_length=140)
-    price = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     slogan = models.TextField(null=True, blank=True)
     category_name = models.CharField(max_length=140, choices=ProductCategory.CATEGORY_NAME_CHOICES, null=True, blank=True, default='Cereal')
+    inventory = models.IntegerField(default=0)
+
+    def has_inventory(self):
+        return self.inventory > 0
 
     def __str__(self):
         return self.product_name
