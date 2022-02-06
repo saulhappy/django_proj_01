@@ -26,6 +26,7 @@ class Product(ProductCategory):
     slogan = models.TextField(null=True, blank=True)
     category_name = models.CharField(max_length=140, choices=ProductCategory.CATEGORY_NAME_CHOICES, null=True, blank=True, default='Cereal')
     inventory = models.IntegerField(default=0)
+    featured = models.BooleanField(default=False)
 
     def has_inventory(self):
         return self.inventory > 0
