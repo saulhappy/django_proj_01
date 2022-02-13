@@ -8,3 +8,8 @@ class OrderForm(forms.ModelForm):
             "shipping_address",
             "billing_address"
         ]
+    
+    def clean(self, *args, **kwargs):
+        cleaned_data = super.clean(*args, **kwargs)
+
+        return cleaned_data
