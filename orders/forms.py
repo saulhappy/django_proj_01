@@ -4,17 +4,19 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         product = kwargs.pop("product") or None
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.product = product
 
     class Meta:
         model = Order
-        fileds = [
+        fields = [
             "shipping_address",
             "billing_address"
         ]
     
     def clean(self, *args, **kwargs):
         cleaned_data = super.clean(*args, **kwargs)
-
+        if self.product:
+            if not self.product.has_inventory():
+                raise forms.ValidationError("This product is out of stock.")
         return cleaned_data
