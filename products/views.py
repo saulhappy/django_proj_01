@@ -49,4 +49,4 @@ def product_create_view(request):
         obj.user = request.user
         obj.save()
         form = ProductModelForm()
-    return render(request, "form.html", {"form": form})
+    return render(request, "forms.html", {"form": form})
