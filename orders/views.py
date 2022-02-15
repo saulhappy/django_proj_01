@@ -24,8 +24,8 @@ def order_checkout_view(request):
     if not order_id:
         order_obj = Order.objects.create(product=product, user=user)
         request.session['order_id'] = order_obj.id
-    form = OrderForm(request.POST or None, product=product)
+    form = OrderForm(request.POST or None, product=product, instance=order_obj)
     if form.is_valid():
-        print(form.cleaned_data.get("shipping_address"))
-        print(form.cleaned_data.get("billing_address"))
+        order_obj.shipping_address = form.cleaned_data.get("shipping_address")
+        order_obj.shipping_address = form.cleaned_data.get("billing_address")
     return render(request, 'forms.html', {"form": form})

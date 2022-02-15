@@ -15,7 +15,7 @@ class OrderForm(forms.ModelForm):
         ]
     
     def clean(self, *args, **kwargs):
-        cleaned_data = super.clean(*args, **kwargs)
+        cleaned_data = super().clean(*args, **kwargs)
         if self.product:
             if not self.product.has_inventory():
                 raise forms.ValidationError("This product is out of stock.")
