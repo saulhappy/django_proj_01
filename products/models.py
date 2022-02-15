@@ -33,21 +33,3 @@ class Product(ProductCategory):
 
     def __str__(self):
         return self.product_name
-
-    def calculate_tax_totals(self, save=False):
-        if not self.product: return {}
-
-        subtotal = self.product.price
-        tax_rate = 0.825
-        tax_total = round(subtotal*tax_rate, 2)
-        total = None
-
-        totals = {
-            "subtotal": subtotal,
-            "tax": tax_total,
-            "total": total
-        }
-
-        for k, v in totals.items():
-            setattr(self, k, v)
-
