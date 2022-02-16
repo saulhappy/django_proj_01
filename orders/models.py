@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-
+from django.db.models.signals import pre_save
 from products.models import Product
 
 # Create your models here.
@@ -34,7 +34,7 @@ class Order(models.Model):
         subtotal = self.product.price
         tax_rate = 0.825
         tax_total = round(subtotal*tax_rate, 2)
-        total = self.total + tax_total
+        total = round(subtotal + tax_total, 2)
 
         totals = {
             "subtotal": subtotal,
@@ -44,3 +44,10 @@ class Order(models.Model):
 
         for k, v in totals.items():
             setattr(self, k, v)
+            if save == True: self.save()
+        return totals
+
+def order_pre_save(sender, instance, *args, **kwargs):
+    instance.calculate(save=False)
+
+pre_save.connect(order_pre_save, sender=Order)
