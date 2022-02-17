@@ -1,7 +1,10 @@
+from unicodedata import decimal
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import pre_save
 from products.models import Product
+
+from decimal import *
 
 # Create your models here.
 
@@ -32,9 +35,9 @@ class Order(models.Model):
         if not self.product: return {}
 
         subtotal = self.product.price
-        tax_rate = 0.825
-        tax_total = round(subtotal*tax_rate, 2)
-        total = round(subtotal + tax_total, 2)
+        tax_rate = Decimal(0.0825)
+        tax_total = subtotal * tax_rate
+        total = subtotal + tax_total
 
         totals = {
             "subtotal": subtotal,
