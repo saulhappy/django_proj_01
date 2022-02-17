@@ -27,5 +27,6 @@ def order_checkout_view(request):
     form = OrderForm(request.POST or None, product=product, instance=order_obj)
     if form.is_valid():
         order_obj.shipping_address = form.cleaned_data.get("shipping_address")
-        order_obj.shipping_address = form.cleaned_data.get("billing_address")
+        order_obj.billing_address = form.cleaned_data.get("billing_address")
+        order_obj.save()
     return render(request, 'forms.html', {"form": form})
