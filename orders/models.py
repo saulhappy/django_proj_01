@@ -28,7 +28,7 @@ class Order(models.Model):
     billing_address = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def calculate_tax_totals(self, save=False):
+    def calculate(self, save=False):
         if not self.product: return {}
 
         subtotal = self.product.price
