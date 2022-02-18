@@ -4,9 +4,15 @@
     <form method="POST" action=".">{% csrf_token %}
     {{ form.as_p }}
     <p>
-        {{ object.subtotal }}
+        <b>Subtotal: </b> {{ object.sub_total }}
     </p>
-    <button type="submit">Send some data</button>
+    <p>
+        <b>Tax: </b> {{ object.tax }}
+    </p>
+    <p>
+        <b>Total: </b> {{ object.total }}
+    </p>
+    <button type="submit">Complete Order</button>
     </form>
 
     {% endblock %}
