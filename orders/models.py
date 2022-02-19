@@ -31,6 +31,15 @@ class Order(models.Model):
     billing_address = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def mark_paid(self, custom_amount=False, save=False):
+        paid_amount = self.total
+        if custom_amount: paid_amount = custom_amount
+        self.paid = paid_amount
+        self.status = "paid"
+        if save: self.save()
+        return self.paid
+
+
     def calculate(self, save=False):
         if not self.product: return {}
 
