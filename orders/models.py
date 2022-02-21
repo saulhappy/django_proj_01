@@ -36,6 +36,7 @@ class Order(models.Model):
         if custom_amount: paid_amount = custom_amount
         self.paid = paid_amount
         self.status = "paid"
+        if self.product: self.product.decrement_inventory(save=True)
         if save: self.save()
         return self.paid
 
@@ -43,10 +44,10 @@ class Order(models.Model):
     def calculate(self, save=False):
         if not self.product: return {}
 
-        subtotal = self.product.price
+        subtotal = round(self.product.price, 2)
         tax_rate = Decimal(0.0825)
-        tax_total = subtotal * tax_rate
-        total = subtotal + tax_total
+        tax_total = round((subtotal * tax_rate), 2)
+        total = round((subtotal + tax_total), 2)
 
         totals = {
             "subtotal": subtotal,
