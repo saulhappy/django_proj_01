@@ -31,5 +31,10 @@ class Product(ProductCategory):
     def has_inventory(self):
         return self.inventory > 0
 
+    def decrement_inventory(self, save=True):
+        self.inventory -= 1
+        if save: self.save()
+        return self.inventory
+
     def __str__(self):
         return self.product_name
