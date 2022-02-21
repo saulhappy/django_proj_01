@@ -30,4 +30,6 @@ def order_checkout_view(request):
         order_obj.billing_address = form.cleaned_data.get("billing_address")
         order_obj.mark_paid(save=False)
         order_obj.save()
+        del request.session["order_id"]
+        return redirect("/success")
     return render(request, 'orders/checkout.html', {"form": form, "object": order_obj})
