@@ -27,6 +27,7 @@ class Product(ProductCategory):
     category_name = models.CharField(max_length=140, choices=ProductCategory.CATEGORY_NAME_CHOICES, null=True, blank=True, default='Cereal')
     inventory = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='products/', null=True, blank=True)
 
     def has_inventory(self):
         return self.inventory > 0
