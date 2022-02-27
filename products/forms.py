@@ -13,7 +13,8 @@ class ProductModelForm(forms.ModelForm):
             'product_name',
             'category_name',
             'price',
-            'slogan'
+            'slogan',
+            'image',
         ]
 
     def clean_slogan(self):

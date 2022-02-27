@@ -43,9 +43,10 @@ def product_list_view(request, *args, **kwargs):
 
 @staff_member_required
 def product_create_view(request):
-    form = ProductModelForm(request.POST or None)   
+    form = ProductModelForm(request.POST or None, request.FILES or None)   
     if form.is_valid():
         obj = form.save(commit=False)
+        obj.image = request.FILES['image']
         obj.user = request.user
         obj.save()
         form = ProductModelForm()
