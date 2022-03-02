@@ -7,10 +7,7 @@ User = settings.AUTH_USER_MODEL
 
 class ProductCategory(models.Model):
     CATEGORY_NAME_CHOICES = (
-        ('Marketing Analytics', 'Marketing Analytics'),
-        ('Sales Analytics', 'Sales Analytics'),
-        ('Engineering Analytics', 'Engineering Analytics'),
-        ('Web Analytics', 'Web Analytics'),
+        ('Candy', 'Candy'),
         ('Cereal', 'Cereal')
     )
 
@@ -24,7 +21,7 @@ class Product(ProductCategory):
     product_name = models.CharField(max_length=140)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     slogan = models.TextField(null=True, blank=True)
-    category_name = models.CharField(max_length=140, choices=ProductCategory.CATEGORY_NAME_CHOICES, null=True, blank=True, default='Cereal')
+    category_name = models.CharField(max_length=140, choices=ProductCategory.CATEGORY_NAME_CHOICES, null=True, blank=True)
     inventory = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='products/', null=True, blank=True)
