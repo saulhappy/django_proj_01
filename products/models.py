@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from .storages import ProtectedStorages
+
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -25,6 +27,7 @@ class Product(ProductCategory):
     inventory = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='products/', null=True, blank=True)
+    media = models.FileField(storage=ProtectedStorages, upload_to='products/', null=True, blank=True)
 
     def has_inventory(self):
         return self.inventory > 0
