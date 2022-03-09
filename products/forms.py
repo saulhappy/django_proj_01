@@ -15,6 +15,7 @@ class ProductModelForm(forms.ModelForm):
             'price',
             'slogan',
             'image',
+            'media',
         ]
 
     def clean_slogan(self):
