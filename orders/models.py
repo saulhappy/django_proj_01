@@ -1,10 +1,11 @@
+from decimal import *
 from unicodedata import decimal
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import pre_save
-from products.models import Product
 
-from decimal import *
+from products.models import Product
 
 # Create your models here.
 
