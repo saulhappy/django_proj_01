@@ -63,4 +63,4 @@ def download_order_media(request, *args, **kwargs):
         response['Content-Disposition'] = f"attachment;filename={file_name}"
         response['X-SendFile'] = f"{file_name}"
 
-    return HttpResponse
+    return response
